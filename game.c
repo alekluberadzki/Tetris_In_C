@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h> // Potrzebne do Sleep() i exit() w lock_piece
+#include <windows.h> 
 #include "game.h"
 #include "pieces.h"
 
@@ -15,8 +15,9 @@ int check_collision(GameState *gs, int grid[4][4], int nx, int ny) {
             if(grid[i][j]) {
                 int bx = nx + j;
                 int by = ny + i;
-                if(bx < 0 || bx >= WIDTH || by >= HEIGHT) return 1;
-                if(by >= 0 && gs->board[by][bx]) return 1;
+
+                if(bx < 0 || bx >= WIDTH || by >= HEIGHT) return 1; // Ściany i dół
+                if(by >= 0 && gs->board[by][bx]) return 1;          // Inne klocki
             }
         }
     }
@@ -30,8 +31,19 @@ void rotate(GameState *gs) {
             temp[j][3 - i] = gs->cgrid[i][j];
         }
     }
+
     if(!check_collision(gs, temp, gs->cx, gs->cy)) {
         memcpy(gs->cgrid, temp, sizeof(temp));
+    } 
+    else {
+        if(!check_collision(gs, temp, gs->cx - 1, gs->cy)) {
+            gs->cx--;
+            memcpy(gs->cgrid, temp, sizeof(temp));
+        }
+        else if(!check_collision(gs, temp, gs->cx + 1, gs->cy)) {
+            gs->cx++;
+            memcpy(gs->cgrid, temp, sizeof(temp));
+        }
     }
 }
 
@@ -44,6 +56,7 @@ void clear_lines(GameState *gs) {
         }
         if(full) {
             lines_cleared++;
+            gs->total_lines++;
             for(int k = i; k > 0; k--) {
                 memcpy(gs->board[k], gs->board[k-1], WIDTH * sizeof(int));
             }

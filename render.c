@@ -3,7 +3,6 @@
 #include "render.h"
 #include "pieces.h"
 
-// Funkcja prywatna dla modułu render.c, nie musi być w .h
 void gotoxy(int x, int y) {
     COORD coord;
     coord.X = x;
@@ -39,6 +38,7 @@ void draw(GameState *gs) {
         printf("|");
         
         if(i == 2) printf("   WYNIK: %d", gs->score);
+        else if(i == 3) printf("   LINIE: %d  (Gra przyspiesza o pol sekundy za kazde 10 linijek)", gs->total_lines);
         else if(i == 4) printf("   NASTEPNY:");
         else if(i >= 5 && i < 9) {
             printf("   ");
@@ -55,7 +55,9 @@ void draw(GameState *gs) {
                 else printf(" ");
             }
         }
-        else if(i == 17) printf("   [Strzalki] Ruch/Obrot");
+        else if(i == 15) printf("   [Strzalka w gore] Obrot");
+        else if(i == 16) printf("   [Strzalki lewo/prawo] Ruch");
+        else if(i == 17) printf("   [Strzalka w dol] Powolny zrzut");
         else if(i == 18) printf("   [Spacja] Zrzut  [C] Schowek");
         else if(i == 19) printf("   [Q] Wyjscie");
         

@@ -23,11 +23,14 @@ int main() {
     copy_piece(state.cgrid, state.current_piece);
     state.cx = 3; 
     state.cy = 0;
+    state.total_lines = 0;
     
     int timer = 0;
-    int delay = 400; 
+
     
     while(1) {
+        int delay = 400 - (state.total_lines / 10) * 50;
+        if (delay < 50) delay = 50; 
         draw(&state);
         
         if (_kbhit()) {

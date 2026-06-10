@@ -6,4 +6,4 @@
 void hide_cursor();
 void draw(GameState *gs);
 
-#endif // RENDER_H
+#endif 

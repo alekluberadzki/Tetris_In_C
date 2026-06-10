@@ -18,7 +18,8 @@ typedef struct {
 
 void copy_piece(int dest[4][4], int src_index);
 int check_collision(GameState *gs, int grid[4][4], int nx, int ny);
-void rotate(GameState *gs);
+// void rotate(GameState *gs);
+void rotate_piece(GameState *gs, int direction);
 void lock_piece(GameState *gs);
 void do_hold(GameState *gs);
 

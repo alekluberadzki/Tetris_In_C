@@ -40,14 +40,20 @@ int main() {
                 if (ch == 75) { if(!check_collision(&state, state.cgrid, state.cx - 1, state.cy)) state.cx--; } 
                 else if (ch == 77) { if(!check_collision(&state, state.cgrid, state.cx + 1, state.cy)) state.cx++; } 
                 else if (ch == 80) { if(!check_collision(&state, state.cgrid, state.cx, state.cy + 1)) state.cy++; } 
-                else if (ch == 72) { rotate(&state); } 
-            }
-            else if(ch == 'q' || ch == 'Q') break;
-            else if(ch == ' ') {
-                while(!check_collision(&state, state.cgrid, state.cx, state.cy + 1)) state.cy++;
-                lock_piece(&state);
-                timer = 0;
-            }
+
+                }
+                else if (ch == 'x' || ch == 'X') { 
+                    rotate_piece(&state, 1); 
+                }
+                else if (ch == 'z' || ch == 'Z') { 
+                    rotate_piece(&state, -1); 
+                }
+                else if(ch == 'q' || ch == 'Q') break;
+                else if(ch == ' ') {
+                    while(!check_collision(&state, state.cgrid, state.cx, state.cy + 1)) state.cy++;
+                    lock_piece(&state);
+                    timer = 0;
+                }
             else if(ch == 'c' || ch == 'C') { do_hold(&state); }
         }
         

@@ -55,11 +55,12 @@ void draw(GameState *gs) {
                 else printf(" ");
             }
         }
-        else if(i == 15) printf("   [Strzalka w gore] Obrot");
-        else if(i == 16) printf("   [Strzalki lewo/prawo] Ruch");
-        else if(i == 17) printf("   [Strzalka w dol] Powolny zrzut");
-        else if(i == 18) printf("   [Spacja] Zrzut  [C] Schowek");
-        else if(i == 19) printf("   [Q] Wyjscie");
+        else if(i == 15) printf("   [x] Obrot w prawo");
+        else if(i == 16) printf("   [z] Obrot w lewo");
+        else if(i == 17) printf("   [Strzalki lewo/prawo] Ruch");
+        else if(i == 18) printf("   [Strzalka w dol] Powolny zrzut");
+        else if(i == 19) printf("   [Spacja] Zrzut  [C] Schowek");
+        else if(i == 20) printf("   [Q] Wyjscie");
         
         printf("          \n");
     }

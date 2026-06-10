@@ -24,28 +24,32 @@ int check_collision(GameState *gs, int grid[4][4], int nx, int ny) {
     return 0;
 }
 
-void rotate(GameState *gs) {
+// Obrót w prawo
+void rotate_piece(GameState *gs, int direction) {
     int temp[4][4];
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
-            temp[j][3 - i] = gs->cgrid[i][j];
+            if (direction == 1) // W prawo
+                temp[j][3 - i] = gs->cgrid[i][j];
+            else // W lewo
+                temp[3 - j][i] = gs->cgrid[i][j];
         }
     }
 
     if(!check_collision(gs, temp, gs->cx, gs->cy)) {
         memcpy(gs->cgrid, temp, sizeof(temp));
-    } 
-    else {
-        if(!check_collision(gs, temp, gs->cx - 1, gs->cy)) {
-            gs->cx--;
-            memcpy(gs->cgrid, temp, sizeof(temp));
-        }
-        else if(!check_collision(gs, temp, gs->cx + 1, gs->cy)) {
-            gs->cx++;
-            memcpy(gs->cgrid, temp, sizeof(temp));
-        }
+    }
+    else if(!check_collision(gs, temp, gs->cx - 1, gs->cy)) {
+        gs->cx--;
+        memcpy(gs->cgrid, temp, sizeof(temp));
+    }
+    else if(!check_collision(gs, temp, gs->cx + 1, gs->cy)) {
+        gs->cx++;
+        memcpy(gs->cgrid, temp, sizeof(temp));
     }
 }
+
+
 
 void clear_lines(GameState *gs) {
     int lines_cleared = 0;
